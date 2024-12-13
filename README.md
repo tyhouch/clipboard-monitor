@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Clipboard Privacy Monitor
+
+A proof-of-concept application demonstrating an enterprise-grade clipboard monitoring system designed to prevent accidental leakage of sensitive company information.
+
+![Example Screenshot](./example.png)
+
+## Overview
+
+This project showcases a potential solution for organizations looking to protect sensitive data from being accidentally shared through copy-paste actions. While this demo uses a cloud-based LLM, the concept could be implemented using local models running directly on employee machines for enhanced privacy and security.
+
+### Key Features
+
+- Real-time clipboard content analysis
+- Instant feedback on paste attempts
+- Historical tracking of paste checks
+- Visual indicators for safe/unsafe content
+- Minimal UI interference for legitimate paste actions
+
+### How It Works
+
+1. User attempts to paste content into any application
+2. The system intercepts the paste action
+3. Content is analyzed for potential sensitive information
+4. If safe, the paste proceeds normally
+5. If sensitive information is detected, the paste is blocked and the user is notified
+
+This proof of concept demonstrates the feasibility of a system-wide implementation that could:
+- Run entirely locally using on-device ML models
+- Integrate with enterprise security policies
+- Provide audit logs for security teams
+- Help prevent accidental data leaks
+
+## Technical Implementation
+
+The current implementation uses:
+- Next.js for the web interface
+- Prisma for paste history tracking
+- LLM integration for content analysis
+- SQLite for local storage
+- TypeScript for type safety
+
+While this demo runs as a web application, the same principles could be applied to create a system-wide service that monitors all clipboard activities across applications.
+
+## Future Possibilities
+
+- System-wide installation and monitoring
+- Local LLM implementation for enhanced privacy
+- Custom rule sets for different security levels
+- Integration with DLP (Data Loss Prevention) systems
+- Real-time reporting to security teams
+- Custom allowed/blocked content patterns
 
 ## Getting Started
 
-First, run the development server:
+If you'd like to try out this proof of concept:
 
+1. Clone the repository
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone <repository-url>
+cd clipboard-monitor
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+2. Install dependencies
+```bash
+npm install
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+3. Set up the database
+```bash
+npx prisma migrate dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+4. Create a `.env` file with your OpenAI credentials
+```
+AZURE_OPENAI_API_KEY=your-key-here
+AZURE_OPENAI_ENDPOINT=your-endpoint-here
+AZURE_OPENAI_DEPLOYMENT=your-deployment-here
+```
 
-## Learn More
+5. Run the development server
+```bash
+npm run dev
+```
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Note: The OpenAI integration is just for demonstration purposes. In a production environment, this would be replaced with a local model running directly on the user's machine for enhanced privacy and security.

@@ -1,0 +1,7 @@
+-- CreateTable
+CREATE TABLE "PasteCheck" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "contentPreview" TEXT NOT NULL,
+    "isSafe" BOOLEAN NOT NULL,
+    "timestamp" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
